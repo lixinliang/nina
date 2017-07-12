@@ -2,7 +2,7 @@
   "name": "nina",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "app.js",
   "bin": {
     "nina": "./bin/nina.js"
   },
@@ -12,5 +12,8 @@
     "commander": "^2.11.0",
     "exceljs": "^0.4.13",
     "shelljs": "^0.7.8"
+  },
+  "config": {
+    "debug": false
   }
 }
