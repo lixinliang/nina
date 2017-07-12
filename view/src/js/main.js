@@ -1,19 +1,6 @@
-import router from './component/router';
+import app from './app';
 
-let vm = new Vue({
-    router,
-    render (h) {
-        return (
-            <div id="app" ref="app">
-                <router-view ref="router-view"></router-view>
-            </div>
-        );
-    },
-});
-
-vm.$mount('app');
-
-window.vm = vm;
+new Vue(app).$mount('app');
 
 // console.log('Node: ', process.versions.node);
 // console.log('Chrome: ', process.versions.chrome);
