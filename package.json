@@ -1,5 +1,6 @@
 {
   "name": "nina",
+  "productName": "Nina",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -11,7 +12,9 @@
   "dependencies": {
     "commander": "^2.11.0",
     "exceljs": "^0.4.13",
-    "shelljs": "^0.7.8"
+    "ppt-template": "^1.0.9",
+    "shelljs": "^0.7.8",
+    "yargs": "^8.0.2"
   },
   "config": {
     "debug": false
