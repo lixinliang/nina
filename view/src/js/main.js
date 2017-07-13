@@ -1,6 +1,6 @@
 import app from './app';
 
-new Vue(app).$mount('app');
+window.vm = new Vue(app).$mount('app');
 
 // console.log('Node: ', process.versions.node);
 // console.log('Chrome: ', process.versions.chrome);
