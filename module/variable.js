@@ -7,8 +7,6 @@ const name = `${ app.getName().slice(0, 1).toUpperCase() }${ app.getName().slice
 const version = app.getVersion();
 const logo = nativeImage.createFromPath(path.join(__dirname, '../icon/logo.png'));
 
-console.log(path.join(__dirname, './icon/logo.png'));
-
 module.exports = {
     name,
     version,
