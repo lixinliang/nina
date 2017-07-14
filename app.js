@@ -3,7 +3,7 @@
 const url = require('url');
 const path = require('path');
 const { argv } = require('yargs');
-const { createTray, createMenu } = require('./module/index.js');
+const { createTray, createMenu, createIPC } = require('./module/index.js');
 const { app, BrowserWindow } = require('electron');
 
 const release = 'release';
@@ -43,8 +43,10 @@ function createWindow () {
 
     createMenu();
 
-    const { webContents } = win;
+    createIPC();
 
+    // TODO: webContents
+    const { webContents } = win;
     webContents.send('electron:log', '123');
 
 }
