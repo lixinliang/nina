@@ -14,42 +14,56 @@ program
     .option('debug', 'Debug app')
     .parse(process.argv);
 
-let folder = '/Users/lixinliang/GitHub/nina/';
+function main () {
 
-if (program.run) {
-    shelljs.cd(folder);
-    shelljs.exec('electron . --env=dev');
+    let folder = '/Users/lixinliang/GitHub/nina/';
+
+    if (program.run) {
+        shelljs.cd(folder);
+        shelljs.exec('electron . --env=dev');
+        return;
+    }
+
+    if (program.build) {
+        let dest = '/Users/lixinliang/Desktop/';
+        packager({
+            'arch' : 'x64',
+            'platform' : 'darwin',
+            'dir' : `${ folder }`,
+            'out' : `${ dest }`,
+            'icon' : `${ path.join(folder, './icon/logo.icns') }`,
+            'ignore' : ['.DS_Store'],
+            'overwrite' : true,
+            'electronVersion' : '1.4.12',
+            'appCopyright' : 'Copyright (c) 2017 lixinliang',
+            'version-string':{
+                'ProductName' : 'Nina',
+                'InternalName' : 'Nina',
+                'OriginalFilename' : 'Nina',
+                'CompanyName' : 'lixinliang',
+                'FileDescription' : 'Nina Tool Desktop',
+            },
+        }, ( err ) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            shelljs.exec(`open ${ dest }`);
+        });
+        return;
+        // shelljs.cd(folder);
+        // shelljs.exec(`electron-packager . Nina --platform=darwin --arch=x64 --overwrite --out=${ dest } --icon=./icon/logo.png --ignore='(.DS_Store)' --electron-version 1.4.12 && open ${ dest }`);
+    }
+
+    if (program.debug) {
+        shelljs.cd(folder);
+        shelljs.exec(`osascript -e 'tell application "Terminal" to do script "node-inspector"'`);
+        shelljs.exec(`open -a "Google Chrome" "http://127.0.0.1:8080/debug?ws=127.0.0.1:8080&port=5858"`);
+        shelljs.exec('electron --debug-brk=5858 . --env=debug');
+        return;
+    }
+
+    shelljs.exec('nina -h');
 }
 
-if (program.build) {
-    let dest = '/Users/lixinliang/Desktop/';
-    packager({
-        'arch' : 'x64',
-        'platform' : 'darwin',
-        'dir' : `${ folder }`,
-        'out' : `${ dest }`,
-        'icon' : `${ path.join(folder, './icon/logo.icns') }`,
-        'ignore' : ['.DS_Store'],
-        'overwrite' : true,
-        'electron-version' : '1.4.12',
-        'app-copyright' : 'lixinliang',
-        'version-string':{
-            'ProductName' : 'Nina',
-            'CompanyName' : 'lixinliang',
-            'InternalName' : 'NinaDesktop',
-            'FileDescription' : 'NinaDesktop',
-            'OriginalFilename' : 'NinaDesktop',
-        },
-    }, ( err ) => {
-        shelljs.exec(`open ${ dest }`);
-    });
-    // shelljs.cd(folder);
-    // shelljs.exec(`electron-packager . Nina --platform=darwin --arch=x64 --overwrite --out=${ dest } --icon=./icon/logo.png --ignore='(.DS_Store)' --electron-version 1.4.12 && open ${ dest }`);
-}
-
-if (program.debug) {
-    shelljs.cd(folder);
-    shelljs.exec(`osascript -e 'tell application "Terminal" to do script "node-inspector"'`);
-    shelljs.exec(`open -a "Google Chrome" "http://127.0.0.1:8080/debug?ws=127.0.0.1:8080&port=5858"`);
-    shelljs.exec('electron --debug-brk=5858 . --env=debug');
-}
+main();
