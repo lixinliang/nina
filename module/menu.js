@@ -1,7 +1,7 @@
 'use strict';
 
-const { Menu, shell } = require('electron');
 const { name } = require('./variable');
+const { Menu, shell } = require('electron');
 
 module.exports = function () {
     Menu.setApplicationMenu(Menu.buildFromTemplate(
@@ -71,17 +71,17 @@ module.exports = function () {
                     },
                 ],
             },
-            {
-                label : 'View',
-                submenu : [
-                    {
-                        role : 'reload',
-                    },
-                    {
-                        role : 'toggledevtools',
-                    },
-                ],
-            },
+            // {
+            //     label : 'View',
+            //     submenu : [
+            //         {
+            //             role : 'reload',
+            //         },
+            //         {
+            //             role : 'toggledevtools',
+            //         },
+            //     ],
+            // },
             {
                 role : 'window',
                 submenu : [
