@@ -16,6 +16,7 @@ function createWindow () {
     win = new BrowserWindow({
         width : 300,
         height : 300,
+        show : false,
         resizable : false,
         fullscreenable : false,
         titleBarStyle : 'hidden',
@@ -28,26 +29,20 @@ function createWindow () {
             pathname : path.join(__dirname, 'view/dist/_index.html'),
         }));
     } else {
-        win.loadURL(`http://172.26.128.101:3001/_index.html`);
+        // win.loadURL(`http://172.26.128.101:3001/_index.html`);
+        win.loadURL(`http://192.168.1.110:3000/_index.html`);
+        win.webContents.openDevTools();
     }
 
-    // Emitted when the window is closed.
-    win.on('closed', () => {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        win = null;
-    });
+    win.once('ready-to-show', () => win.show());
 
-    createTray(win);
+    win.on('closed', () => win = null);
+
+    let { ipc, sender } = createIPC(win);
+
+    createTray(win, ipc, sender);
 
     createMenu();
-
-    createIPC();
-
-    // TODO: webContents
-    const { webContents } = win;
-    webContents.send('electron:log', '123');
 
 }
 
@@ -57,13 +52,7 @@ function createWindow () {
 app.on('ready', createWindow);
 
 // Quit when all windows are closed.
-app.on('window-all-closed', () => {
-    // On macOS it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
+app.on('window-all-closed', () => app.quit());
 
 app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
@@ -72,34 +61,3 @@ app.on('activate', () => {
         createWindow();
     }
 });
-
-// const fs = require('fs');
-// const path = require('path');
-// const Excel = require('exceljs');
-// const { app, BrowserWindow } = require('electron');
-
-// var filename = path.join(__dirname, './test.xlsx');
-
-// var workbook = new Excel.Workbook();
-// workbook.xlsx.readFile(filename).then(function ( excel ) {
-//     excel.eachSheet(function(sheet, sheetNumber) {
-//         console.log('Sheet Number ' + sheetNumber);
-//         console.log('Sheet Name ' + sheet.name);
-//         sheet.eachRow(function(row, rowNumber) {
-//             console.log('Row Number ' + rowNumber);
-//             console.log('Row Value ' + JSON.stringify(row.values));
-//         });
-//     });
-// });
-
-
-
-// ipcMain.on('ondragstart', ( event, filePath ) => {
-//     console.log(123);
-//     // event.sender.startDrag({
-//     //     file: filePath,
-//     //     icon: '/path/to/icon.png'
-//     // });
-// });
-
-//
