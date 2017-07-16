@@ -2,7 +2,7 @@
   "name": "nina",
   "productName": "Nina",
   "version": "1.0.0",
-  "description": "",
+  "description": "[🖥 MacOS] Import Excel Data into PPT.",
   "main": "app.js",
   "bin": {
     "nina": "./bin/nina.js"
