@@ -3,8 +3,8 @@
 const url = require('url');
 const path = require('path');
 const { argv } = require('yargs');
-const { createTray, createMenu, createIPC } = require('./module/index.js');
 const { app, BrowserWindow } = require('electron');
+const { createTray, createMenu, createIPC } = require('./module/index.js');
 
 const release = 'release';
 const env = argv.env || release;
@@ -31,7 +31,7 @@ function createWindow () {
     } else {
         // win.loadURL(`http://172.26.128.101:3001/_index.html`);
         win.loadURL(`http://192.168.1.110:3000/_index.html`);
-        win.webContents.openDevTools();
+        // win.webContents.openDevTools();
     }
 
     win.once('ready-to-show', () => win.show());
