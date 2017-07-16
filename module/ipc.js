@@ -4,15 +4,9 @@ const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const fse = require('fs-extra');
-const ppt = require('./ppt');
-const excel = require('./excel');
+const generate = require('./generate.js');
 const { ipcMain, shell } = require('electron');
 const { name, version } = require('./variable');
-
-let parse = {
-    ppt,
-    excel,
-};
 
 module.exports = function ( win ) {
 
@@ -87,34 +81,9 @@ module.exports = function ( win ) {
     });
 
     ipc.async('generate-ppt', ( event, paths ) => {
-        const [ excel, ppt, output ] = paths;
-        let error = ( err ) => {
-            let message = `${ err }`;
-            console.log(message);
-            sender(event).send('generate-ppt', {
-                err : {
-                    message,
-                },
-            });
-        };
-        let exists = ( file ) =>
-            new Promise(( resolve, reject ) =>
-                fs.exists(file, ( exists ) => {
-                    if (exists) return resolve(true);
-                    reject(new Error(`Error: ENOENT: no such file or directory, open '${ file }'`));
-                })
-            )
-        ;
-        Promise.all([
-            exists(excel),
-            exists(ppt),
-        ]).then(() => fse.ensureDir(output))
-        .then(() => parse.excel(excel))
-        .then(( data ) => {
-            // TODO:
-            console.log(data);
-            sender(event).send('generate-ppt', {});
-        }).catch(error);
+        generate(paths, ( payload ) => {
+            sender(event).send('generate-ppt', payload);
+        });
     });
 
     return {
