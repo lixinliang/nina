@@ -82,21 +82,21 @@ module.exports = function () {
             //         },
             //     ],
             // },
-            {
-                role : 'window',
-                submenu : [
-                    {
-                        label : 'Close',
-                        accelerator : 'CmdOrCtrl+W',
-                        role : 'close',
-                    },
-                    {
-                        label : 'Minimize',
-                        accelerator : 'CmdOrCtrl+M',
-                        role : 'minimize',
-                    },
-                ],
-            },
+            // {
+            //     role : 'window',
+            //     submenu : [
+            //         {
+            //             label : 'Close',
+            //             accelerator : 'CmdOrCtrl+W',
+            //             role : 'close',
+            //         },
+            //         {
+            //             label : 'Minimize',
+            //             accelerator : 'CmdOrCtrl+M',
+            //             role : 'minimize',
+            //         },
+            //     ],
+            // },
             {
                 role : 'help',
                 submenu : [
