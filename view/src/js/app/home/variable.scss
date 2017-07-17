@@ -1,0 +1,30 @@
+$color-ppt-press: hsl(25, 96, 54);
+$color-ppt-normal: hsl(25, 96, 59);
+$color-ppt-hover: hsl(25, 96, 64);
+
+$color-excel-press: hsl(91, 47, 44);
+$color-excel-normal: hsl(91, 47, 49);
+$color-excel-hover: hsl(91, 47, 54);
+
+$color-output-press: hsl(219, 72, 53);
+$color-output-normal: hsl(219, 72, 58);
+$color-output-hover: hsl(219, 72, 63);
+
+$color-submit-press: hsl(0, 10, 15);
+$color-submit-normal: hsl(0, 10, 20);
+$color-submit-hover: hsl(0, 10, 25);
+$color-submit-disabled: #a0a0a0;
+
+@mixin button-focus {
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 8px;
+        transform: translateY(-50%);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #fff;
+    }
+}
