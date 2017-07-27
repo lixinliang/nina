@@ -7,6 +7,29 @@
 # nina
 > [🖥 MacOS] Import Excel Data into PPT.
 
+## Screen Shot
+
+![](./screenshot.jpg)
+
+## Usage
+
+* Pick one `*.xlsx` file.
+* Pick one `*.pptx` file.
+* Pick an output folder.
+* Generate it.
+
+## Rule
+
+* The output `*.pptx` file is cloned from the template `*.pptx` file.
+* In the template file, any text match `[A1]` would replace to correct text in the `A1` cell of `*.xlsx` file.
+
+## Download
+
+* [Nina.zip(51M)](https://github.com/lixinliang/nina/releases/download/v1.0.0/Nina-darwin-x64.zip)
+
+## Quick Start
+
+* There is an example [test.zip(55K)](https://github.com/lixinliang/nina/releases/download/v1.0.0/test.zip)
 
 ## License
 
