@@ -7,7 +7,14 @@
   "bin": {
     "nina": "./bin/nina.js"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lixinliang/nina.git"
+  },
+  "author": {
+    "name": "lixinliang",
+    "url": "https://github.com/lixinliang"
+  },
   "license": "MIT",
   "dependencies": {
     "commander": "^2.11.0",
